@@ -1,0 +1,279 @@
+# COMP611
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Quiz</title>
+    <style>
+        pre {
+            white-space: pre-wrap;
+        }
+        select {
+            margin: 0 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Fill in the Blanks</h1>
+    <p>Complete the code by selecting the correct option for each blank.</p>
+    
+<pre>
+class Node {
+    int data;
+    Node left;
+    Node right;
+
+    public Node(int data) {
+        this.data = data;
+        this.left = null;
+        this.right = null;
+    }
+}
+
+class BinaryTree {
+    Node root;
+
+    public BinaryTree() {
+        this.root = null;
+    }
+
+
+    public void insert(int <select id="blank1">
+                        <option value="data">data</option>
+                        <option value="item">item</option>
+                        <option value="value">value</option>
+                        <option value="key">key</option>
+                    </select>) {
+        root = insertRec(root, data);
+    }
+
+    private Node insertRec(Node root, int data) {
+        if (root == <select id="blank2">
+                                <option value="root">root</option>
+                                <option value="node">node</option>
+                                <option value="tree">tree</option>
+                                <option value="null">null</option>
+                              </select>) {
+            root = new Node(data);
+            return root;
+        }
+
+        if (data < root.data) {
+            root.left = insertRec(root.left, data);
+        } else if (data > root.data) {
+            root.right = insertRec(root.right, data);
+        }
+
+        return root;
+    }
+
+
+    public boolean search(int data) {
+        return searchRec(root, data);
+    }
+
+    private boolean searchRec(Node root, int data) {
+        if (<select id="blank3">
+            <option value="root">root</option>
+            <option value="node">node</option>
+            <option value="leaf">leaf</option>
+            <option value="tree">tree</option>
+        </select> == null) {
+            return false;
+        }
+
+        if (root.data == data) {
+            return true;
+        } else if (data < root.data) {
+            return searchRec(root.<select id="blank4">
+                                                    <option value="right">right</option>
+                                                    <option value="left">left</option>
+                                                    <option value="node">node</option>
+                                                    <option value="tree">tree</option>
+                                                  </select>, data);
+        } else {
+            return searchRec(root.right, data);
+        }
+    }
+
+
+    public void inorderTraversal() {
+        inorderRec(root);
+    }
+
+    private void inorderRec(Node root) {
+        if (root != null) {
+            inorderRec(root.left);
+            System.out.print(root.<select id="blank5">
+                            <option value="item">item</option>
+                            <option value="value">value</option>
+                            <option value="data">data</option>
+                            <option value="key">key</option>
+                         </select> + " ");
+            inorderRec(root.right);
+        }
+    }
+
+
+    public static void main(String[] args) {
+        BinaryTree tree = new BinaryTree();
+        tree.insert(5);
+        tree.insert(3);
+        tree.insert(7);
+        tree.insert(2);
+        tree.insert(4);
+        tree.insert(6);
+        tree.insert(8);
+
+        System.out.println("Inorder Traversal:");
+        tree.inorderTraversal();
+
+        int searchKey = 4;
+        if (tree.search(searchKey)) {
+            System.out.println(searchKey + " is present in the tree.");
+        } else {
+            System.out.println(searchKey + " is not present in the tree.");
+        }
+    }
+}
+</pre>
+
+    <button onclick="checkAnswers()">Check Answers</button>
+    <p id="feedback"></p>
+    <a id="downloadLink" style="display:none;" download="CompleteCode.java">Download the Code</a>
+    
+    <script>
+        function checkAnswers() {
+            var answers = ["data", "null", "root", "left", "data"];
+            var feedback = document.getElementById("feedback");
+            var correctCount = 0;
+
+	    feedback.innerHTML = "";
+
+            for (var i = 0; i < answers.length; i++) {
+                var userAnswer = document.getElementById("blank" + (i + 1)).value;
+                if (userAnswer === answers[i]) {
+                    correctCount++;
+                } else {
+                    feedback.innerHTML += "Blank " + (i + 1) + " is incorrect.<br>";
+                }
+            }
+
+            if (correctCount === answers.length) {
+                feedback.innerHTML = "All answers are correct!";
+                feedback.style.color = "green";
+		document.getElementById("downloadLink").style.display = "block";
+            } else {
+                feedback.innerHTML += "You got " + correctCount + " out of " + answers.length + " correct.<br>";
+                feedback.innerHTML += "Correct answers: <br>";
+                for (var i = 0; i < answers.length; i++) {
+                    feedback.innerHTML += "Blank " + (i + 1) + ": " + answers[i] + "<br>";
+                }
+                feedback.style.color = "red";
+		document.getElementById("downloadLink").style.display = "none";
+            }
+        }
+	document.getElementById("downloadLink").href = "data:text/plain;charset=utf-8," + 
+            encodeURIComponent(`
+class Node {
+    int data;
+    Node left;
+    Node right;
+
+    public Node(int data) {
+        this.data = data;
+        this.left = null;
+        this.right = null;
+    }
+}
+
+class BinaryTree {
+    Node root;
+
+    public BinaryTree() {
+        this.root = null;
+    }
+
+
+    public void insert(int data) {
+        root = insertRec(root, data);
+    }
+
+    private Node insertRec(Node root, int data) {
+        if (root == null) {
+            root = new Node(data);
+            return root;
+        }
+
+        if (data < root.data) {
+            root.left = insertRec(root.left, data);
+        } else if (data > root.data) {
+            root.right = insertRec(root.right, data);
+        }
+
+        return root;
+    }
+
+
+    public boolean search(int data) {
+        return searchRec(root, data);
+    }
+
+    private boolean searchRec(Node root, int data) {
+        if (root == null) {
+            return false;
+        }
+
+        if (root.data == data) {
+            return true;
+        } else if (data < root.data) {
+            return searchRec(root.left, data);
+        } else {
+            return searchRec(root.right, data);
+        }
+    }
+
+
+    public void inorderTraversal() {
+        inorderRec(root);
+    }
+
+    private void inorderRec(Node root) {
+        if (root != null) {
+            inorderRec(root.left);
+            System.out.print(root.data + " ");
+            inorderRec(root.right);
+        }
+    }
+
+
+    public static void main(String[] args) {
+        BinaryTree tree = new BinaryTree();
+        tree.insert(5);
+        tree.insert(3);
+        tree.insert(7);
+        tree.insert(2);
+        tree.insert(4);
+        tree.insert(6);
+        tree.insert(8);
+
+        System.out.println("Inorder Traversal:");
+        tree.inorderTraversal();
+
+        int searchKey = 4;
+        if (tree.search(searchKey)) {
+            System.out.println(searchKey + " is present in the tree.");
+        } else {
+            System.out.println(searchKey + " is not present in the tree.");
+        }
+    }
+}
+
+ 
+
+
+`);
+    </script>
+</body>
+</html>
